@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+     id: 4
+     author: Mykola_Hordieiev
+     changes:
+       - addUniqueConstraint:
+          columnNames: login
+          tableName: person
+       - createTable:
+          columns:
+           - column:
+              autoIncrement: true
+              constraints:
+                nullable: false
+                primaryKey: true
+              name: id
+              type: BIGINT
+           - column:
+              constraints:
+                nullable: false
+              name: player1
+              type: varchar(60)
+           - column:
+               constraints:
+                 nullable: false
+               name: player2
+               type: varchar(60)
+           - column:
+              name: state
+              type: varchar(60)
+           - column:
+               name: board
+               type: varchar(60)
+          tableName: game

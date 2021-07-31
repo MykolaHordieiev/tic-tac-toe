@@ -1,0 +1,12 @@
+- addForeignKeyConstraint:
+            baseColumnNames: player1
+            baseTableName: game
+            constraintName: fk1_game_person
+            referencedColumnNames: login
+            referencedTableName: person
+        - addForeignKeyConstraint:
+            baseColumnNames: player2
+            baseTableName: game
+            constraintName: fk2_game_person
+            referencedColumnNames: login
+            referencedTableName: person
