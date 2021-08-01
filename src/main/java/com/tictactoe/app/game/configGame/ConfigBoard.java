@@ -20,6 +20,11 @@ public class ConfigBoard {
         return new Board(boardArr);
     }
 
+    public Board configBoardForWinningCombinations(){
+        String[] boardArr = getBoardArray();
+        return new Board(boardArr);
+    }
+
     private String[] getBoardArray() {
         String[] boardArr = new String[9];
         for (int i = 0; i < 9; i++) {

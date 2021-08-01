@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 @Component
@@ -19,54 +21,49 @@ public class Play {
     private final ConfigGame configGame;
     private final Map<String, State> stateMap;
 
-//    public static void main(String[] args) {
-//        ConfigBoard configBoard = new ConfigBoard();
-//        ConfigPlayers configPlayers = new ConfigPlayers();
-//        Person person1 = new Person(1L, "one", "one_first", "one_last", 23);
-//        Person person2 = new Person(2L, "two", "two_first", "two_last", 26);
-//        Player player1 = configPlayers.getPlayer(person1);
-//        Player player2 = configPlayers.getPlayer(person2);
-//        Game game = new Game(player1, player2, new Turn(), new Board(configBoard.board().getBoard()));
-//        Play play =
-//                new Play(new CheckWinner(game, new HashMap<>()));
-//        play.playTheGame(game);
-//    }
-
     public Game startGame(Person person1, Person person2) {
         return configGame.startNewGame(person1, person2);
     }
 
     public Game turn(Game game, TurnDTO turnDTO) {
-        if (game.getIsPlaying()) {
-            String turn = game.getState().requiredTurn();
-            int numInput = turnDTO.getTurn().getTurn();
-            Board board = game.getBoard();
-            checkCorrespondenceTurn(numInput);
-            if (board.getBoard()[numInput - 1].equals(
-                    String.valueOf(numInput))) {
-                board.getBoard()[numInput - 1] = turn;
-                if (turn.equals("X")) {
-                    game.setState(stateMap.get("requiredTurnO"));
-                } else {
-                    game.setState(stateMap.get("requiredTurnX"));
-                }
-                game.setBoard(board);
+        checkGameIsOver(game);
+
+        String turn = game.getState().requiredTurn();
+        int numInput = turnDTO.getTurn().getTurn();
+        Board board = game.getBoard();
+        checkCorrespondenceTurn(numInput);
+        if (board.getBoard()[numInput - 1].equals(
+                String.valueOf(numInput))) {
+            board.getBoard()[numInput - 1] = turn;
+            if (turn.equals("X")) {
+                game.setState(stateMap.get("requiredTurnO"));
             } else {
-                throw new RuntimeException("Slot already taken; re-enter slot number:");
+                game.setState(stateMap.get("requiredTurnX"));
             }
-            if (checkFinishedGame(game)) {
-                String drawOrWin = checkWinner.drawOrWin(game);
-                if (drawOrWin.equalsIgnoreCase("draw")) {
-                    game.setState(stateMap.get(drawOrWin));
-                } else {
-                    game.setState(stateMap.get("haveWinner"));
-                }
-                game.setIsPlaying(false);
-                return game;
+            game.setBoard(board);
+        } else {
+            throw new RuntimeException("Slot already taken; re-enter slot number:");
+        }
+
+        if (checkFinishedGame(game)) {
+            boolean isDraw = game.getResult().keySet().stream()
+                    .anyMatch(key -> key.equals("draw"));
+            if (isDraw) {
+                game.setState(stateMap.get("draw"));
+            } else {
+                game.setState(stateMap.get("haveWinner"));
             }
+            game.setIsPlaying(false);
             return game;
         }
-        throw new RuntimeException("Game is over");
+        return game;
+    }
+
+    private boolean checkGameIsOver(Game game) {
+        return Stream.of(game).map(Game::getIsPlaying)
+                .findFirst()
+                .filter(aBoolean -> aBoolean.equals(true))
+                .orElseThrow(() -> new RuntimeException("Game is over"));
     }
 
     private boolean checkCorrespondenceTurn(int numInput) {
@@ -79,5 +76,4 @@ public class Play {
     private boolean checkFinishedGame(Game game) {
         return checkWinner.checkWinnerMethod(game).isPresent();
     }
-
 }
