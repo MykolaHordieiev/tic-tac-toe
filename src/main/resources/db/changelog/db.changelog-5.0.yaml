@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 5
+      author: Mykola_Hordieiev
+      changes:
+        - addColumn:
+            tableName: game
+            columns:
+              - column:
+                  name: playing
+                  type: boolean

@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 3
+      author: Mykola_Hordieiev
+      changes:
+        - addColumn:
+            tableName: person
+            columns:
+              - column:
+                  name: login
+                  type: varchar(60)
