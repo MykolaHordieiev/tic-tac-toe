@@ -14,11 +14,6 @@ public class RequiredTurnX implements State{
     private String requiredTurn;
 
     @Override
-    public String toString() {
-        return this.state;
-    }
-
-    @Override
     public String getState() {
         return this.state;
     }

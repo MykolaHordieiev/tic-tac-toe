@@ -22,13 +22,13 @@ public class GameController {
     @PostMapping("/tic-tac-toe/start")
     public ResponseImpl startGame(@RequestBody StartGameDto startGameDTO) {
         Game game = gameService.startGame(startGameDTO);
-        return new ResponseImpl(game.getId(), game.getState(), game.getBoard());
+        return new ResponseImpl(game.getId(), game.getState().getState(), game.getBoard());
     }
 
     @PostMapping("/turn")
     public ResponseImpl requiredTurn(@RequestBody TurnDto turnDTO) {
         Game game = gameService.turn(turnDTO);
-        return new ResponseImpl(game.getId(), game.getState(), game.getBoard());
+        return new ResponseImpl(game.getId(), game.getState().getState(), game.getBoard());
     }
 
 

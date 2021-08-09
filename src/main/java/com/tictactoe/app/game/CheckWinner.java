@@ -13,8 +13,7 @@ public class CheckWinner {
     private final ConfigWinningCombinations configWinningCombinations;
 
     public Optional<Map<String, Optional<Player>>> checkWinnerMethod(Game game) {
-        boolean haveWinner = checkHaveWinnerCombination(game).keySet().stream()
-                .anyMatch(key -> key.equals("have winner"));
+        boolean haveWinner = checkHaveWinnerCombination(game).containsKey(GameEnums.WINNER.name());
         if (haveWinner) {
             return Optional.of(game.getResult());
         }
@@ -28,13 +27,14 @@ public class CheckWinner {
     private Map<String, Optional<Player>> checkHaveWinnerCombination(Game game) {
         configWinningCombinations.getWinningCombinations(game.getBoard()).stream()
                 .map(WinningCombination::getCombination)
-                .filter(stringCombination -> stringCombination.equals("XXX") || stringCombination.equals("OOO"))
+                .filter(stringCombination -> stringCombination.equals(GameEnums.XXX.name())
+                        || stringCombination.equals(GameEnums.OOO.name()))
                 .findFirst()
                 .ifPresent(str -> {
-                    if (str.equals("XXX")) {
-                        game.getResult().put("have winner", Optional.of(game.getPlayer1()));
+                    if (str.equals(GameEnums.XXX.name())) {
+                        game.getResult().put(GameEnums.WINNER.name(), Optional.of(game.getPlayer1()));
                     } else {
-                        game.getResult().put("have winner", Optional.of(game.getPlayer2()));
+                        game.getResult().put(GameEnums.WINNER.name(), Optional.of(game.getPlayer2()));
                     }
                 });
         return game.getResult();
@@ -49,7 +49,7 @@ public class CheckWinner {
                     String.valueOf(a + 1))) {
                 break;
             } else if (a == 8) {
-                game.getResult().put("draw", Optional.empty());
+                game.getResult().put(GameEnums.DRAW.name(), Optional.empty());
                 return true;
             }
         }

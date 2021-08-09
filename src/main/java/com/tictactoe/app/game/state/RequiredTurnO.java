@@ -22,9 +22,4 @@ public class RequiredTurnO implements State {
     public String requiredTurn() {
         return this.requiredTurn;
     }
-
-    @Override
-    public String toString() {
-        return this.state;
-    }
 }

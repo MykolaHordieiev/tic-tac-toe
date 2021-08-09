@@ -15,11 +15,11 @@ public class ConfigStatesMap {
                                         RequiredTurnO requiredTurnO, HaveWinner haveWinner,
                                         Draw draw) {
         Map<String, State> statesMap = new HashMap<>();
-        statesMap.put("startGame", startGame);
-        statesMap.put("requiredTurnX", requiredTurnX);
-        statesMap.put("requiredTurnO", requiredTurnO);
-        statesMap.put("haveWinner", haveWinner);
-        statesMap.put("draw", draw);
+        statesMap.put(startGame.getState(), startGame);
+        statesMap.put(requiredTurnX.getState(), requiredTurnX);
+        statesMap.put(requiredTurnO.getState(), requiredTurnO);
+        statesMap.put(haveWinner.getState(), haveWinner);
+        statesMap.put(draw.getState(), draw);
         return statesMap;
     }
 }

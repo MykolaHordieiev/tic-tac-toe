@@ -5,6 +5,7 @@ import com.tictactoe.app.game.configGame.ConfigGame;
 import com.tictactoe.app.game.entity.Board;
 import com.tictactoe.app.game.entity.Field;
 import com.tictactoe.app.game.entity.Game;
+import com.tictactoe.app.game.entity.GameEnums;
 import com.tictactoe.app.game.state.State;
 import com.tictactoe.app.person.Person;
 import lombok.RequiredArgsConstructor;
@@ -46,8 +47,7 @@ public class Play {
         }
 
         if (checkFinishedGame(game)) {
-            boolean isDraw = game.getResult().keySet().stream()
-                    .anyMatch(key -> key.equals("draw"));
+            boolean isDraw = game.getResult().containsKey(GameEnums.DRAW.name());
             if (isDraw) {
                 game.setState(stateMap.get("draw"));
             } else {
