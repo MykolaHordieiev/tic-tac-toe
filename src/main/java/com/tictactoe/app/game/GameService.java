@@ -1,7 +1,7 @@
 package com.tictactoe.app.game;
 
-import com.tictactoe.app.dto.StartGameDTO;
-import com.tictactoe.app.dto.TurnDTO;
+import com.tictactoe.app.dto.StartGameDto;
+import com.tictactoe.app.dto.TurnDto;
 import com.tictactoe.app.game.entity.Game;
 import com.tictactoe.app.person.Person;
 import com.tictactoe.app.person.repo.PersonRepository;
@@ -19,7 +19,7 @@ public class GameService {
     private final Play play;
     private final GameRepository gameRepository;
 
-    public Game startGame(StartGameDTO startGameDTO) {
+    public Game startGame(StartGameDto startGameDTO) {
         Person person1 = getPersonByLogin(startGameDTO.getLogin1());
         Person person2 = getPersonByLogin(startGameDTO.getLogin2());
         Game game = play.startGame(person1, person2);
@@ -27,7 +27,7 @@ public class GameService {
         return game;
     }
 
-    public Game turn(TurnDTO turnDTO) {
+    public Game turn(TurnDto turnDTO) {
         Game game = gameRepository.getGameById(turnDTO.getGameId()).orElseThrow(
                 () -> new RuntimeException("game not found")
         );

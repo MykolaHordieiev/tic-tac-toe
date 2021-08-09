@@ -1,7 +1,7 @@
 package com.tictactoe.app.game;
 
-import com.tictactoe.app.dto.StartGameDTO;
-import com.tictactoe.app.dto.TurnDTO;
+import com.tictactoe.app.dto.StartGameDto;
+import com.tictactoe.app.dto.TurnDto;
 import com.tictactoe.app.game.entity.Game;
 import com.tictactoe.app.game.entity.ResponseImpl;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class GameController {
 
     private final GameService gameService;
-    private final ResponseImpl response;
 
     @GetMapping("/tic-tac-toe")
     public String welcome() {
@@ -21,21 +20,15 @@ public class GameController {
     }
 
     @PostMapping("/tic-tac-toe/start")
-    public ResponseImpl startGame(@RequestBody StartGameDTO startGameDTO) {
+    public ResponseImpl startGame(@RequestBody StartGameDto startGameDTO) {
         Game game = gameService.startGame(startGameDTO);
-        response.setGameId(game.getId());
-        response.setState(game.getState());
-        response.setBoard(game.getBoard());
-        return response;
+        return new ResponseImpl(game.getId(), game.getState(), game.getBoard());
     }
 
     @PostMapping("/turn")
-    public ResponseImpl requiredTurn(@RequestBody TurnDTO turnDTO) {
+    public ResponseImpl requiredTurn(@RequestBody TurnDto turnDTO) {
         Game game = gameService.turn(turnDTO);
-        response.setGameId(game.getId());
-        response.setState(game.getState());
-        response.setBoard(game.getBoard());
-        return response;
+        return new ResponseImpl(game.getId(), game.getState(), game.getBoard());
     }
 
 

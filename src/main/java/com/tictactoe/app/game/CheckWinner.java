@@ -1,16 +1,11 @@
 package com.tictactoe.app.game;
 
 import com.tictactoe.app.game.configGame.ConfigWinningCombinations;
-import com.tictactoe.app.game.entity.Board;
-import com.tictactoe.app.game.entity.Game;
-import com.tictactoe.app.game.entity.Player;
-import com.tictactoe.app.game.entity.WinningCombination;
+import com.tictactoe.app.game.entity.*;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class CheckWinner {
@@ -24,33 +19,33 @@ public class CheckWinner {
             return Optional.of(game.getResult());
         }
 
-        boolean isDraw = checkDraw(game);
-        if (isDraw) {
+        if (checkDraw(game)) {
             return Optional.of(game.getResult());
         }
-
         return Optional.empty();
     }
 
     private Map<String, Optional<Player>> checkHaveWinnerCombination(Game game) {
         configWinningCombinations.getWinningCombinations(game.getBoard()).stream()
                 .map(WinningCombination::getCombination)
-                .filter(stringCombination -> stringCombination.equals("XXX"))
+                .filter(stringCombination -> stringCombination.equals("XXX") || stringCombination.equals("OOO"))
                 .findFirst()
-                .ifPresent(str -> game.getResult().put("have winner", Optional.of(game.getPlayer1())));
-
-        configWinningCombinations.getWinningCombinations(game.getBoard()).stream()
-                .map(WinningCombination::getCombination)
-                .filter(stringCombination -> stringCombination.equals("OOO"))
-                .findFirst()
-                .ifPresent(str -> game.getResult().put("have winner", Optional.of(game.getPlayer2())));
-
+                .ifPresent(str -> {
+                    if (str.equals("XXX")) {
+                        game.getResult().put("have winner", Optional.of(game.getPlayer1()));
+                    } else {
+                        game.getResult().put("have winner", Optional.of(game.getPlayer2()));
+                    }
+                });
         return game.getResult();
     }
 
     private boolean checkDraw(Game game) {
+        List<String> fields = game.getBoard().getFields().stream()
+                .map(Field::toString)
+                .collect(Collectors.toList());
         for (int a = 0; a < 9; a++) {
-            if (Arrays.asList(game.getBoard().getBoard()).contains(
+            if (fields.contains(
                     String.valueOf(a + 1))) {
                 break;
             } else if (a == 8) {
@@ -59,17 +54,6 @@ public class CheckWinner {
             }
         }
         return false;
-    }
-
-    public Player getWinner(Game game) {
-        return game.getResult().get("have winner").orElseThrow(RuntimeException::new);
-    }
-
-    public String drawOrWin(Game game) {
-        return game.getResult().keySet().stream()
-                .filter(string -> string.equals("have winner"))
-                .findFirst()
-                .orElse("draw");
     }
 }
 

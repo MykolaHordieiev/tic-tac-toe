@@ -1,6 +1,6 @@
 package com.tictactoe.app.person;
 
-import com.tictactoe.app.dto.PersonDTO;
+import com.tictactoe.app.dto.PersonDto;
 import com.tictactoe.app.person.repo.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final PersonMapperFromDTOtoPerson mapperFromDTOtoPerson;
 
-    public Person insertPerson(PersonDTO personDTO) {
+    public Person insertPerson(PersonDto personDTO) {
         Long id = personRepository.savePerson(personDTO);
         return mapperFromDTOtoPerson.getPersonFromSaveDTO(personDTO, id);
     }

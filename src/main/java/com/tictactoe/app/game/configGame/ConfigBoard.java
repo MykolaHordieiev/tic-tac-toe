@@ -1,35 +1,31 @@
 package com.tictactoe.app.game.configGame;
 
 import com.tictactoe.app.game.entity.Board;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import com.tictactoe.app.game.entity.Field;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class ConfigBoard {
-
     public Board configBoardWhenStartGame() {
-        String[] boardArr = getBoardArray();
-        return new Board(boardArr);
+        return new Board(getFieldList());
+    }
+
+    private List<Field> getFieldList() {
+        List<Field> fields = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            fields.add(new Field(String.valueOf(i + 1)));
+        }
+        return fields;
     }
 
     public Board configBoardFromDB(String board) {
+        List<Field> fields = new ArrayList<>();
         String[] split = board.split("");
-        String[] boardArr = new String[9];
-        System.arraycopy(split, 0, boardArr, 0, 9);
-        return new Board(boardArr);
-    }
-
-    public Board configBoardForWinningCombinations(){
-        String[] boardArr = getBoardArray();
-        return new Board(boardArr);
-    }
-
-    private String[] getBoardArray() {
-        String[] boardArr = new String[9];
-        for (int i = 0; i < 9; i++) {
-            boardArr[i] = String.valueOf(i + 1);
-        }
-        return boardArr;
+        Arrays.stream(split).forEach(s -> fields.add(new Field(s)));
+        return new Board(fields);
     }
 }

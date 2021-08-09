@@ -1,7 +1,7 @@
 package com.tictactoe.app.person.repo;
 
 import com.tictactoe.app.person.Person;
-import com.tictactoe.app.dto.PersonDTO;
+import com.tictactoe.app.dto.PersonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -55,7 +55,7 @@ public class PersonRepoImpl implements PersonRepository {
     }
 
     @Override
-    public Long savePerson(PersonDTO personDTO) {
+    public Long savePerson(PersonDto personDTO) {
         String insertPerson = "INSERT INTO person (first_name,last_name,age) VALUES (?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {

@@ -2,33 +2,16 @@ package com.tictactoe.app.game.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Board {
-
-    private final String[] board;
-
-    public Board(String[] board) {
-        this.board = board;
-    }
+    private final List<Field> fields;
 
     @Override
     public String toString() {
-        return board[0] + board[1] + board[2] +
-                board[3] + board[4] + board[5] +
-                board[6] + board[7] + board[8];
+        StringBuilder sb = new StringBuilder();
+        fields.forEach(field -> sb.append(field.getValue()));
+        return sb.toString();
     }
-
-//    @Override
-//    public String toString() {
-//        return "|---|---|---|" + "\n" +
-//                "| " + board[0] + " | " + board[1] + " | " + board[2] +
-//                " |" + "\n" +
-//                "|-----------|" + "\n" +
-//                "| " + board[3] + " | " + board[4] + " | " + board[5] +
-//                " |" + "\n" +
-//                "|-----------|" + "\n" +
-//                "| " + board[6] + " | " + board[7] + " | " + board[8] +
-//                " |" + "\n" +
-//                "|---|---|---|" + "\n";
-//    }
 }

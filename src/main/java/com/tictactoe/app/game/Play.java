@@ -1,8 +1,9 @@
 package com.tictactoe.app.game;
 
-import com.tictactoe.app.dto.TurnDTO;
+import com.tictactoe.app.dto.TurnDto;
 import com.tictactoe.app.game.configGame.ConfigGame;
 import com.tictactoe.app.game.entity.Board;
+import com.tictactoe.app.game.entity.Field;
 import com.tictactoe.app.game.entity.Game;
 import com.tictactoe.app.game.state.State;
 import com.tictactoe.app.person.Person;
@@ -10,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
@@ -25,16 +25,16 @@ public class Play {
         return configGame.startNewGame(person1, person2);
     }
 
-    public Game turn(Game game, TurnDTO turnDTO) {
+    public Game turn(Game game, TurnDto turnDTO) {
         checkGameIsOver(game);
 
         String turn = game.getState().requiredTurn();
-        int numInput = turnDTO.getTurn().getTurn();
+        int numInput = turnDTO.getTurn();
         Board board = game.getBoard();
         checkCorrespondenceTurn(numInput);
-        if (board.getBoard()[numInput - 1].equals(
-                String.valueOf(numInput))) {
-            board.getBoard()[numInput - 1] = turn;
+
+        if (containsBoardInputValue(board, numInput)) {
+            board.getFields().get(numInput - 1).setValue(turn);
             if (turn.equals("X")) {
                 game.setState(stateMap.get("requiredTurnO"));
             } else {
@@ -59,10 +59,16 @@ public class Play {
         return game;
     }
 
+    private boolean containsBoardInputValue(Board board, int numInput) {
+        return board.getFields().stream()
+                .map(Field::toString)
+                .anyMatch(value -> value.equals(String.valueOf(numInput)));
+    }
+
     private boolean checkGameIsOver(Game game) {
         return Stream.of(game).map(Game::getIsPlaying)
                 .findFirst()
-                .filter(aBoolean -> aBoolean.equals(true))
+                .filter(isPlaying -> isPlaying.equals(true))
                 .orElseThrow(() -> new RuntimeException("Game is over"));
     }
 

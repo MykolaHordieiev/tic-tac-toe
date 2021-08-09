@@ -1,6 +1,6 @@
 package com.tictactoe.app.person;
 
-import com.tictactoe.app.dto.PersonDTO;
+import com.tictactoe.app.dto.PersonDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +14,7 @@ public class PersonController {
     private final PersonService personService;
 
     @PostMapping("/save")
-    public Person addPerson(@RequestBody PersonDTO personDTO) {
+    public Person addPerson(@RequestBody PersonDto personDTO) {
         return personService.insertPerson(personDTO);
     }
 
