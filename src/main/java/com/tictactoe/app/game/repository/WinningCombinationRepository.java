@@ -1,4 +1,4 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.repository;
 
 import com.tictactoe.app.game.entity.WinningCombination;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.playGame;
 
 import com.tictactoe.app.game.entity.Game;
 import lombok.RequiredArgsConstructor;

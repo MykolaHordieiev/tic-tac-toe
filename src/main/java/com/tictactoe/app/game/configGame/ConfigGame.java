@@ -1,6 +1,5 @@
 package com.tictactoe.app.game.configGame;
 
-import com.tictactoe.app.game.ConfigState;
 import com.tictactoe.app.game.entity.*;
 import com.tictactoe.app.game.entity.State;
 import com.tictactoe.app.person.Person;
@@ -8,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Component

@@ -1,5 +1,6 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.playGame;
 
+import com.tictactoe.app.game.configGame.ConfigState;
 import com.tictactoe.app.game.entity.Field;
 import com.tictactoe.app.game.entity.Game;
 import com.tictactoe.app.game.entity.GameEnums;
@@ -22,8 +23,7 @@ public class CheckDraw {
                 .map(Field::toString)
                 .collect(Collectors.toList());
         for (int a = 0; a < 9; a++) {
-            if (fields.contains(
-                    String.valueOf(a + 1))) {
+            if (fields.contains(String.valueOf(a + 1))) {
                 break;
             } else if (a == 8) {
                 game.getResult().put(GameEnums.DRAW.name(), Optional.empty());

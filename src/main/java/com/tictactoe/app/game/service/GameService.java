@@ -1,8 +1,10 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.service;
 
 import com.tictactoe.app.dto.StartGameDto;
 import com.tictactoe.app.dto.TurnDto;
+import com.tictactoe.app.game.playGame.Play;
 import com.tictactoe.app.game.entity.Game;
+import com.tictactoe.app.game.repository.GameRepository;
 import com.tictactoe.app.person.Person;
 import com.tictactoe.app.person.repo.PersonRepository;
 import lombok.Data;

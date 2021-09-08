@@ -1,8 +1,10 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.playGame;
 
 import com.tictactoe.app.dto.TurnDto;
 import com.tictactoe.app.game.configGame.ConfigGame;
+import com.tictactoe.app.game.configGame.ConfigState;
 import com.tictactoe.app.game.entity.Game;
+import com.tictactoe.app.game.playGame.CheckFinishedGame;
 import com.tictactoe.app.person.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

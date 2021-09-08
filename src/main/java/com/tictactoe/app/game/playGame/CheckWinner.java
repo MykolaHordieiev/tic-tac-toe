@@ -1,5 +1,6 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.playGame;
 
+import com.tictactoe.app.game.configGame.ConfigState;
 import com.tictactoe.app.game.configGame.ConfigWinningCombinations;
 import com.tictactoe.app.game.entity.*;
 import lombok.RequiredArgsConstructor;

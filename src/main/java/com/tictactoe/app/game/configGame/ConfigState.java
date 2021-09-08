@@ -1,5 +1,6 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.configGame;
 
+import com.tictactoe.app.game.service.StateService;
 import com.tictactoe.app.game.entity.GameEnums;
 import com.tictactoe.app.game.entity.State;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,7 @@ public class ConfigState {
 
     public State getNextState(State state) {
         String turn = state.getRequiredTurn();
-        if (turn.equals("X")) {
+        if (turn.equals(GameEnums.X.name())) {
             return stateService.getStateByDescription(GameEnums.REQUIRED_TURN_O.name());
         } else {
             return stateService.getStateByDescription(GameEnums.REQUIRED_TURN_X.name());

@@ -1,5 +1,6 @@
-package com.tictactoe.app.game;
+package com.tictactoe.app.game.service;
 
+import com.tictactoe.app.game.repository.StateRepository;
 import com.tictactoe.app.game.entity.State;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,12 +1,9 @@
 package com.tictactoe.app.game.configGame;
 
-import com.tictactoe.app.game.WinningCombinationService;
-import com.tictactoe.app.game.entity.Board;
+import com.tictactoe.app.game.service.WinningCombinationService;
 import com.tictactoe.app.game.entity.Field;
 import com.tictactoe.app.game.entity.WinningCombination;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
