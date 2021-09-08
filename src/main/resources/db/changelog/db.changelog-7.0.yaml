@@ -1,14 +1,8 @@
 databaseChangeLog:
   - changeSet:
-      id: 5
+      id: createStateTable
       author: Mykola_Hordieiev
       changes:
-        - addColumn:
-            tableName: game
-            columns:
-              - column:
-                  name: playing
-                  type: boolean
         - createTable:
             columns:
               - column:
@@ -21,16 +15,12 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: first_field_number
-                  type: int
+                    unique: true
+                  name: description
+                  type: varchar(60)
               - column:
                   constraints:
                     nullable: false
-                  name: second_field_number
-                  type: int
-              - column:
-                  constraints:
-                    nullable: false
-                  name: third_field_number
-                  type: int
-            tableName: winning_combination
+                  name: required_turn
+                  type: varchar(60)
+            tableName: state

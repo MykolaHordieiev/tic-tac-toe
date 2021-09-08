@@ -1,0 +1,22 @@
+version: '3.7'
+
+networks:
+  mynet:
+    driver: bridge
+
+
+services:
+
+  database:
+    image: mariadb
+    ports:
+      - 5000:3306
+    networks:
+      - mynet
+    container_name: super_mariadb
+    restart: always
+    environment:
+      MYSQL_USER: someuser
+      MYSQL_PASSWORD: somepass
+      MYSQL_DATABASE: testdb
+      MARIADB_ROOT_PASSWORD: test123

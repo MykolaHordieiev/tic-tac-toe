@@ -12,7 +12,7 @@ public interface PersonRepository {
 
     Optional<Person> getPersonById(Long id);
 
-    Long savePerson(PersonDto personDTO);
+    Person savePerson(Person person);
 
     Optional<Person> getPersonByLogin(String login);
 }

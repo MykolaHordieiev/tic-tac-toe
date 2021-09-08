@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id:  insert-to-state
+      author:  Mykola_Hordieiev
+      changes:
+        -  insert:
+             columns:
+               -  column:
+                    name:  description
+                    value:  START_GAME
+               - column:
+                   name: required_turn
+                   value: X
+             tableName:  state
+        - insert:
+            columns:
+              - column:
+                  name: description
+                  value: REQUIRED_TURN_X
+              - column:
+                  name: required_turn
+                  value: X
+            tableName: state
+        - insert:
+            columns:
+              - column:
+                  name: description
+                  value: REQUIRED_TURN_O
+              - column:
+                  name: required_turn
+                  value: O
+            tableName: state
+        - insert:
+            columns:
+              - column:
+                  name: description
+                  value: HAVE_WINNER
+              - column:
+                  name: required_turn
+                  value: Game is over
+            tableName: state
+        - insert:
+            columns:
+              - column:
+                  name: description
+                  value: DRAW
+              - column:
+                  name: required_turn
+                  value: Game is over
+            tableName: state

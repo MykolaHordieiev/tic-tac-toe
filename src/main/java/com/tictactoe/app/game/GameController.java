@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/game")
 @RequiredArgsConstructor
 public class GameController {
-
     private final GameService gameService;
+    private final InputDataValidator dataValidator;
 
     @GetMapping("/tic-tac-toe")
     public String welcome() {
@@ -22,13 +22,13 @@ public class GameController {
     @PostMapping("/tic-tac-toe/start")
     public ResponseImpl startGame(@RequestBody StartGameDto startGameDTO) {
         Game game = gameService.startGame(startGameDTO);
-        return new ResponseImpl(game.getId(), game.getState().getState(), game.getBoard());
+        return new ResponseImpl(game.getId(), game.getState().getDescription(), game.getBoard());
     }
 
     @PostMapping("/turn")
     public ResponseImpl requiredTurn(@RequestBody TurnDto turnDTO) {
-        Game game = gameService.turn(turnDTO);
-        return new ResponseImpl(game.getId(), game.getState().getState(), game.getBoard());
+        Game game = gameService.turn(dataValidator.validEnteredSlotNumber(turnDTO));
+        return new ResponseImpl(game.getId(), game.getState().getDescription(), game.getBoard());
     }
 
 

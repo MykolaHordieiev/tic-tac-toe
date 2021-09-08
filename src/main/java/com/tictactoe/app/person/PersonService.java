@@ -4,21 +4,18 @@ import com.tictactoe.app.dto.PersonDto;
 import com.tictactoe.app.person.repo.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional
 public class PersonService {
-
     private final PersonRepository personRepository;
-    private final PersonMapperFromDTOtoPerson mapperFromDTOtoPerson;
+    private final PersonMapper personMapper;
 
-    public Person insertPerson(PersonDto personDTO) {
-        Long id = personRepository.savePerson(personDTO);
-        return mapperFromDTOtoPerson.getPersonFromSaveDTO(personDTO, id);
+    public Person insertPerson(PersonDto personDto) {
+        Person person = personMapper.getEntityFromDto(personDto);
+         return personRepository.savePerson(person);
     }
 
     public Person getPersonById(Long id) {

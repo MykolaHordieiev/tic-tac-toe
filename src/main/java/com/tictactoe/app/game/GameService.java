@@ -8,6 +8,7 @@ import com.tictactoe.app.person.repo.PersonRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -27,6 +28,7 @@ public class GameService {
         return game;
     }
 
+    @Transactional
     public Game turn(TurnDto turnDTO) {
         Game game = gameRepository.getGameById(turnDTO.getGameId()).orElseThrow(
                 () -> new RuntimeException("game not found")

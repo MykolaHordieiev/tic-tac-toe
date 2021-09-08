@@ -21,13 +21,13 @@ public class GameRepository {
     private final ConfigGame configGame;
 
     public Long saveGame(Game game) {
-        String insertPerson = "INSERT INTO game (player1,player2,state,board,playing) VALUES (?,?,?,?,?)";
+        String insertGame = "INSERT INTO game (player1,player2,state,board,playing) VALUES (?,?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
-            PreparedStatement ps = connection.prepareStatement(insertPerson, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = connection.prepareStatement(insertGame, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, game.getPlayer1().toString());
             ps.setString(2, game.getPlayer2().toString());
-            ps.setString(3, game.getState().getState());
+            ps.setString(3, game.getState().getDescription());
             ps.setString(4, game.getBoard().toString());
             ps.setBoolean(5, game.getIsPlaying());
             return ps;
@@ -59,7 +59,7 @@ public class GameRepository {
                 , ps -> {
                     ps.setString(1, updateGame.getPlayer1().toString());
                     ps.setString(2, updateGame.getPlayer2().toString());
-                    ps.setString(3, updateGame.getState().getState());
+                    ps.setString(3, updateGame.getState().getDescription());
                     ps.setString(4, updateGame.getBoard().toString());
                     ps.setBoolean(5, updateGame.getIsPlaying());
                 });

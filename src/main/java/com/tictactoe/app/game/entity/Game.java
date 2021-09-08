@@ -1,6 +1,5 @@
 package com.tictactoe.app.game.entity;
 
-import com.tictactoe.app.game.state.State;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 

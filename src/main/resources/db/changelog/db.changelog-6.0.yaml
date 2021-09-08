@@ -1,0 +1,102 @@
+databaseChangeLog:
+  - changeSet:
+      id:  insert-to-winning_combination
+      author:  Mykola_Hordieiev
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 0
+              - column:
+                  name: second_field_number
+                  value: 1
+              - column:
+                  name: third_field_number
+                  value: 2
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 3
+              - column:
+                  name: second_field_number
+                  value: 4
+              - column:
+                  name: third_field_number
+                  value: 5
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 6
+              - column:
+                  name: second_field_number
+                  value: 7
+              - column:
+                  name: third_field_number
+                  value: 8
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 0
+              - column:
+                  name: second_field_number
+                  value: 3
+              - column:
+                  name: third_field_number
+                  value: 6
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 1
+              - column:
+                  name: second_field_number
+                  value: 4
+              - column:
+                  name: third_field_number
+                  value: 7
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 2
+              - column:
+                  name: second_field_number
+                  value: 5
+              - column:
+                  name: third_field_number
+                  value: 8
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 0
+              - column:
+                  name: second_field_number
+                  value: 4
+              - column:
+                  name: third_field_number
+                  value: 8
+            tableName: winning_combination
+        - insert:
+            columns:
+              - column:
+                  name: first_field_number
+                  value: 2
+              - column:
+                  name: second_field_number
+                  value: 4
+              - column:
+                  name: third_field_number
+                  value: 6
+            tableName: winning_combination
+

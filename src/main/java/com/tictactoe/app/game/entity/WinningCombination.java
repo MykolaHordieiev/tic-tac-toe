@@ -4,5 +4,8 @@ import lombok.Data;
 
 @Data
 public class WinningCombination {
-    private final String combination;
+    private Long id;
+    private int firstFieldNumber;
+    private int secondFieldNumber;
+    private int thirdFieldNumber;
 }

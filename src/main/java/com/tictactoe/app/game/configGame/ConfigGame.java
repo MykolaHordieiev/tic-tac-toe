@@ -1,7 +1,8 @@
 package com.tictactoe.app.game.configGame;
 
+import com.tictactoe.app.game.ConfigState;
 import com.tictactoe.app.game.entity.*;
-import com.tictactoe.app.game.state.State;
+import com.tictactoe.app.game.entity.State;
 import com.tictactoe.app.person.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,13 +16,13 @@ public class ConfigGame {
 
     private final ConfigPlayers configPlayers;
     private final ConfigBoard configBoard;
-    private final Map<String, State> statesMap;
+    private final ConfigState configState;
 
     public Game startNewGame(Person person1, Person person2) {
         Player player1 = configPlayers.getPlayerByPerson(person1);
         Player player2 = configPlayers.getPlayerByPerson(person2);
         Board board = configBoard.configBoardWhenStartGame();
-        State state = statesMap.get("startGame");
+        State state = configState.getStateByDescription(GameEnums.START_GAME.name());
         return getGame(player1, player2, board, state, true);
     }
 
@@ -29,7 +30,7 @@ public class ConfigGame {
         Player player1 = configPlayers.getPlayerByLogin(login1);
         Player player2 = configPlayers.getPlayerByLogin(login2);
         Board board = configBoard.configBoardFromDB(strBoard);
-        State state = statesMap.get(strState);
+        State state = configState.getStateByDescription(strState);
         return getGame(player1, player2, board, state, playing);
     }
 

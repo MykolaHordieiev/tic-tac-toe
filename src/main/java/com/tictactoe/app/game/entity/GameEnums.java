@@ -1,5 +1,5 @@
 package com.tictactoe.app.game.entity;
 
 public enum GameEnums {
-    XXX, WINNER, DRAW, OOO;
+    XXX, HAVE_WINNER, DRAW, OOO, REQUIRED_TURN_O, REQUIRED_TURN_X, START_GAME
 }

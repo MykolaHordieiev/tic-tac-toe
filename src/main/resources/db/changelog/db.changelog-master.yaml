@@ -9,3 +9,9 @@ databaseChangeLog:
       file: db/changelog/db.changelog-4.0.yaml
   - include:
       file: db/changelog/db.changelog-5.0.yaml
+  - include:
+      file: db/changelog/db.changelog-6.0.yaml
+  - include:
+      file: db/changelog/db.changelog-7.0.yaml
+  - include:
+      file: db/changelog/db.changelog-8.0.yaml

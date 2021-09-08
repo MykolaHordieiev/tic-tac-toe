@@ -55,23 +55,24 @@ public class PersonRepoImpl implements PersonRepository {
     }
 
     @Override
-    public Long savePerson(PersonDto personDTO) {
-        String insertPerson = "INSERT INTO person (first_name,last_name,age) VALUES (?,?,?)";
+    public Person savePerson(Person person) {
+        String insertPerson = "INSERT INTO person (first_name,last_name,age,login) VALUES (?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(insertPerson, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, personDTO.getFirsName());
-            ps.setString(2, personDTO.getLastName());
-            ps.setInt(3, personDTO.getAge());
+            ps.setString(1, person.getFirsName());
+            ps.setString(2, person.getLastName());
+            ps.setInt(3, person.getAge());
+            ps.setString(4, person.getLogin());
             return ps;
         }, keyHolder);
-
-        return Objects.requireNonNull(keyHolder.getKey()).longValue();
+        person.setId(Objects.requireNonNull(keyHolder.getKey()).longValue());
+        return person;
     }
 
     @Override
     public Optional<Person> getPersonByLogin(String login) {
-        String getPerson = "SELECT * FROM person WHERE login='" + login+"'";
+        String getPerson = "SELECT * FROM person WHERE login='" + login + "'";
         return jdbcTemplate.query(getPerson, resultSet -> {
             if (resultSet.next()) {
                 Person person = new Person();

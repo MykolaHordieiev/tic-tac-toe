@@ -10,15 +10,6 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @SpringBootApplication
 public class Application {
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
